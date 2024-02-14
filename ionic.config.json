@@ -1,0 +1,7 @@
+{
+  "name": "utedevas-menu-v17",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
