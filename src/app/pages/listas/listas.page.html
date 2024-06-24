@@ -1,0 +1,110 @@
+<app-navbar [tareas]="tareas" [pageActive]=" 'listas' "></app-navbar>
+
+<ion-content [fullscreen]="true">
+
+    <main class="main">
+        <div #mySubNav>
+            @if ( listaTareas ) {
+              <!-- <div> -->
+                <div class="listas">
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-subtitle>Crea listas de tareas</ion-card-subtitle>
+                            <ion-card-title>Listas de Tareas</ion-card-title>
+                        </ion-card-header>
+                        <ion-card-content>
+
+                            <ion-list>
+                                <ion-reorder-group [disabled]="reorderDisable" (ionItemReorder)="doReorder($event)">
+                                    <ion-item-sliding class="animated fadeIn fast" (ionSwipe)="borrarTarea(i)" *ngFor="let tarea of tareasLista; let i = index">
+                                        <ion-item color="light" detail (click)="nextSlide(tarea, i)">
+                                            <ion-reorder slot="start"></ion-reorder>
+                                            <!-- <ion-icon name="list-outline" slot="start"></ion-icon> -->
+                                            <ion-label class="ion-text-center"> {{ tarea.titulo }} </ion-label>
+                                            <ion-badge color="dark" class="md-2"> {{ tarea.items.length }} </ion-badge>
+                                        </ion-item>
+                                        <ion-item-options side="end">
+                                            <ion-item-option color="danger" (click)="borrarTarea(i)" expandable>Borrar</ion-item-option>
+                                        </ion-item-options>
+                                    </ion-item-sliding>
+                                </ion-reorder-group>
+                            </ion-list>
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+              <!-- </div> -->
+            } @else {
+              <div class="items">
+                  <div class="listas">
+                      <ion-header>
+                          <ion-toolbar>
+                              <ion-buttons slot="start">
+                                  <ion-buttons slot="start">
+                                      <ion-button (click)="prevSlide()" expand="block" fill="clear" shape="round">
+                                          <ion-icon name="chevron-back-outline"></ion-icon>
+                                      </ion-button>
+                                  </ion-buttons>
+                              </ion-buttons>
+                              <ion-label *ngIf="tareaActiva"> {{ tareaActiva.titulo }} </ion-label>
+                          </ion-toolbar>
+                      </ion-header>
+                      <ion-card class="card-items">
+                          <ion-card-header>
+                              <ion-card-subtitle>Añade parquímetros a la lista</ion-card-subtitle>
+                              <ion-card-title *ngIf="tareaActiva"> {{ tareaActiva.titulo }} </ion-card-title>
+                          </ion-card-header>
+                          <ion-card-content *ngIf="tareaActiva">
+                              <ion-item *ngIf="tareaActiva.items.length < 1" color="secondary">
+                                  <ion-label color="dark" class="ion-text-center">Ningún elemento añadido...</ion-label>
+                              </ion-item>
+                              <div class="list-items">
+                                  <ion-reorder-group [disabled]="reorderDisable" (ionItemReorder)="doReorder($event)">
+                                      <ion-list *ngFor="let item of tareaActiva.items; let i = index">
+                                          <ion-item-sliding class="animated fadeIn fast" (ionSwipe)="borrarItem(i)">
+                                              <ion-item color="light" detail>
+                                                  <ion-reorder slot="start"></ion-reorder>
+                                                  <ion-label class="ion-text-center" (click)="verInfo(item, tareaActiva.titulo)"> {{ item.alias }} </ion-label>
+                                                  <ion-icon *ngIf="item.urlImg" name="image-outline" class="ion-img" (click)="mostrarImagen(i)"></ion-icon>
+                                                  <ion-icon *ngIf="!item.urlImg" name="cloud-upload-outline" class="ion-img" (click)="mostrarModalUploadImg(i)"></ion-icon>
+                                                  <ion-badge color="dark">Barrio {{ item.barrio | slice:0:3 }}</ion-badge>
+                                              </ion-item>
+                                              <ion-item-options side="end">
+                                                  <ion-item-option color="danger" (click)="borrarItem(i)" expandable> Borrar </ion-item-option>
+                                              </ion-item-options>
+                                          </ion-item-sliding>
+                                      </ion-list>
+                                  </ion-reorder-group>
+                              </div>
+                          </ion-card-content>
+                      </ion-card>
+                  </div>
+              </div>
+            }
+        </div>
+        <!-- fab placed to the (vertical) center and start -->
+        <ion-fab *ngIf="!tareaActiva" class="btn-fab" vertical="bottom" horizontal="start" slot="fixed" edge>
+            <ion-fab-button (click)="presentAlertTarea()">
+                <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+        <ion-fab *ngIf="tareaActiva" class="btn-fab" vertical="bottom" horizontal="start" slot="fixed" edge>
+            <ion-fab-button color="secondary" (click)="mostrarMapa()">
+                <ion-icon name="map-outline"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+        <ion-fab *ngIf="!tareaActiva" class="btn-info"  vertical="bottom" horizontal="end" slot="fixed" edge>
+            <ion-fab-button class="btn-info-fab" color="medium" (click)="openModalInfo()">
+                <ion-icon name="information-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+    </main>
+</ion-content>
+@if ( modalUploadImg ) {
+
+  <app-upload-img [Tarea]="tareaActiva!" [idxItem]="idxItem" (cerrarModalUpload)="cerrarModalUploadImg($event)" (actualizarStorage)="cerrarModalUploadImg($event)"></app-upload-img>
+}
+<!-- Mapa con los items -->
+<div *ngIf="mapSearch">
+    <app-map-items class="map-search" [marcadores]="tareaActiva!.items" [listaActiva]="tareaActiva!" [centroMap]="centroMap" [zoomMap]="zoomMap"  (itemEliminado)="itemEliminadoMapa($event)" (closeMap)="cerrandoMapa($event)"></app-map-items>
+</div>
+<modal-info [modalOpen]="modalOpen" [pageActive]=" 'listas' " (closeModal)="closeModalInfo($event)"></modal-info>

@@ -1,0 +1,62 @@
+main {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  background: rgba(215, 211, 215, 1.00);
+}
+
+ion-slides {
+  height: 100%;
+  width: 100%;
+  ion-slide {
+      height: 100%;
+      margin-top: -25px;
+      ion-card {
+          margin: 3rem .5rem !important;
+          &.card-items {
+              margin-top: .5rem !important;
+          }
+      }
+      &.items {
+          margin: 0px;
+      }
+      .listas {
+          width: 100%;
+          height: 100%;
+      }
+  }
+}
+
+ion-card-content {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+ion-fab {
+  margin-bottom: 140px !important;
+  margin-left: 20px !important;
+}
+
+ion-item {
+  margin-bottom: 2px !important;
+}
+
+.ml-2 {
+  margin-left: 1rem !important;
+}
+
+.md-2 {
+  margin-right: .4rem;
+}
+
+.ion-img {
+  margin: 0px 1rem;
+}
+
+.list-items {
+  padding: 0px 0px .5rem 0;
+  overflow-y: scroll !important;
+  max-height: calc(100vh - 250px);
+}

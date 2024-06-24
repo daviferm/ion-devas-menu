@@ -1,0 +1,15 @@
+<app-navbar [pageActive]=" 'home' "></app-navbar>
+
+<ion-content [fullscreen]="true">
+
+  <app-mapa [centroMap]="centroMap" [zoomMap]="zoomMap" [barriosSelec]="barriosSelec" [marcador]="marcador" [mostrarMarker]="mostrarMarker" (botonInfo)="mostrarBotonInfo($event)" (closeMap)="volverMapaGeneral($event)" />
+  <!-- <app-map [barriosSelec]="barriosSelec" [center]="centroMap" [zoomMap]="zoomMap" [marcador]="marcador" /> -->
+  @if ( mostrarBtnInfo ) {
+    <ion-fab class="btn-info"  vertical="bottom" horizontal="start" slot="fixed" edge>
+      <ion-fab-button class="btn-info-fab" color="medium" (click)="openModalInfo()">
+          <ion-icon name="information-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  }
+</ion-content>
+<modal-info [modalOpen]="modalOpen" [pageActive]=" 'home' " (closeModal)="closeModalInfo($event)"></modal-info>

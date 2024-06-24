@@ -1,0 +1,89 @@
+<!-- Angular maps -->
+
+@if ( mostrarMarker ) {
+  <div class="modal-alias bounceInDown">
+    <p class="ion-text-center text-alias"> {{ marcador!.alias }} </p>
+  </div>
+}
+
+@if ( itemsBarrio || mostrarMarker || markerSoport ) {
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button class="btn-close" color="medium" (click)="volverAlMapaGeneral()">
+        <ion-icon name="return-up-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+}
+
+@if ( modalTop && !mostrarMarker ) {
+  <div class="modal-inf animated fadeIn fast">
+    <p><span class="badge badge-dark madal-text mr-2">Barrio: </span> {{ textInfo.barrio }} </p>
+    <p><span class="badge badge-dark madal-text mr-2">Parquímetros:</span> {{ textInfo.numero }}</p>
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-button size="small" color="dark" (click)="mostrarBarrio()">
+            <ion-icon name="pin-outline"></ion-icon>
+        </ion-button>
+    </ion-fab>
+  </div>
+}
+<google-map #mapDiv
+  [options]="mapOptions"
+  height="100vh"
+  width="100vw"
+  [center]="{lat: centroMap.lat, lng: centroMap.lng}"
+  [zoom]="zoomMap"
+  (mapClick)="mapaClick()"
+  (zoomChanged)="zoomChangeMap(mapDiv)"
+  (centerChanged)="changeCenter()">
+
+  <!-- <div class="animated fadeIn fast" *ngFor="let marker of marcadores">
+      <agm-marker [latitude]="marker.latitud" [longitude]="marker.longitud"  (markerClick)="abrirModal(marker)"></agm-marker>
+  </div> -->
+
+      @if ( mostrarMarker && marcador ) {
+        <div class="animated fadeIn fast">
+            <map-marker [position]="{lat: marcador.latitud, lng: marcador.longitud}" [icon]="marcador | imgFabricante" />
+      </div>
+      }
+
+      @if ( pinBarrios ) {
+        <div class="animated fadeIn fast">
+            @for ( marcador of itemsBarrio; track marcador.alias ) {
+              <map-marker [position]="{lat: marcador.latitud, lng: marcador.longitud}"  [icon]="imgMarcadores" [label]="marcador.idx | slice:6:10" (mapClick)="presentActionSheetNavegar(marcador)" />
+            }
+        </div>
+      }
+
+      <div class="animated fadeIn fast" *ngIf="markerSoport">
+          <!-- <map-marker  [latitude]="markerSoport.latitud" [longitude]="markerSoport.longitud" [iconUrl]="imgSoporte" [animation]="'DROP'" [markerDraggable]="true" (dragStart)="dragStart()" (dragEnd)="dragEnd($event)"> -->
+            <map-marker [position]="{lat: markerSoport.latitud, lng: markerSoport.longitud}" [options]="markerSoporteOptions"  [icon]="imgSoporte" [label]="markerSoport.idx | slice:6:10" (mapDragstart)="dragStart()" (mapDragend)="dragEnd($event)" />
+      </div>
+      @if ( gps ) {
+        <map-marker [position]="{lat: latGps, lng: lngGps}"  [options]="markerGpsOptions" [icon]="imgPosition" />
+      }
+
+      <div>
+          @for ( barrio of barriosSelec; track barrio.id; let i = $index ) {
+            <div>
+                <map-polygon #polygon [id]="barrio.id" [options]="barrio.options" [paths]="barrio.coords" (polygonClick)="sobrePolygon(i)" />
+            </div>
+          }
+      </div>
+
+</google-map>
+<!-- fab placed to the top end -->
+@if ( itemsBarrio || mostrarMarker ) {
+  <ion-fab class="btn-nav" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [disabled]="!gps" color="light" (click)="centrarPosicionGps(mapDiv)">
+        <ion-icon class="animated fadeIn" name="navigate"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+}
+
+@if ( mostrarMarker ) {
+  <ion-fab class="btn-navegar" vertical="bottom" horizontal="start" edge slot="fixed">
+    <ion-fab-button (click)="comoLlegar( marcador!, 'google' )">
+        <ion-icon name="map-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+}
+<!-- <app-detalles-modal *ngIf="openModal" [rutaActiva]=" 'home' " [item]="infoMarker" [titulo]="tareaTitle" (cerrarAlert)="cerrarModalInfo($event)"></app-detalles-modal> -->

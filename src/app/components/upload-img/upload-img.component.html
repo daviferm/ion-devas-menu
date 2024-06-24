@@ -1,0 +1,42 @@
+<div #mdlUpload class="fondo-negro animated fadeIn fast" (click)="cerrarModal($event)">
+    <ion-card>
+        <ion-card-header>
+            <ion-toolbar>
+                <ion-buttons slot="end">
+                    <ion-button (click)="cerrarModal($event, true)">
+                        <ion-icon slot="end" name="close"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <h5 class="p-title">Guardar Imagen</h5>
+            </ion-toolbar>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-input type="file" (change)="onFileSelected($event)" />
+            <div class="btn-send">
+                <div #botomImg>
+                    <ion-button class="ion-margin" size="small" color="primary" (click)="guardarImagen()">
+                        <ion-icon slot="end" name="cloud-upload-outline"></ion-icon>
+                        @if ( !Tarea.items[idxItem].urlImg ) {
+                          <ion-label>Guardar</ion-label>
+                        }
+                        @if ( Tarea.items[idxItem].urlImg ) {
+                          <ion-label>Actualizar</ion-label>
+                        }
+                    </ion-button>
+                </div>
+                @if ( Tarea.items[idxItem].urlImg ) {
+                  <ion-button class="ion-margin" size="small" color="danger" (click)="eliminarImg()">
+                      <ion-icon name="trash-outline"></ion-icon>
+                  </ion-button>
+                }
+            </div>
+            <div>
+                @if ( imagen ) {
+                  <ion-img [src]="imagen"></ion-img>
+                }
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+</div>

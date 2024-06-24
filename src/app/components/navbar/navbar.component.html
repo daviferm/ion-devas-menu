@@ -1,0 +1,35 @@
+<div #myHeader class="cabecera">
+  <ion-buttons slot="start">
+      <div class="menu">
+          <ion-menu-button></ion-menu-button>
+      </div>
+      <div class="main-form">
+          <div class="content-btn">
+                  <ion-button #btnBarrio class="btn btn-select">
+                      <ion-list>
+                          <ion-item>
+                              <ion-select mode="ios" [interfaceOptions]="customPopoverOptions" interface="alert" cancel-text="Cancelar" placeholder="Barrios" multiple="false" [selectedText]="selectBarrio" (ionChange)="ionChangeSelect($event)">
+                                  <ion-select-option *ngFor="let barrio of barriosHTML" [value]="barrio | slice:0:3">{{ barrio }}</ion-select-option>
+                              </ion-select>
+                          </ion-item>
+                      </ion-list>
+                  </ion-button>
+                  <ion-button *ngIf="pageActive != 'barrios'" class="btn btn-input">
+                      <ion-list>
+                          <ion-item>
+                              <ion-input class="custonInput" #inputNumber inputmode="numeric" placeholder="Número" (ionChange)="ionChangeInpt(inputNumber)"></ion-input>
+                          </ion-item>
+                      </ion-list>
+                      <!-- <input #inputNumber type="number" placeholder="0000" (ionChange)="ionChangeInpt(inputNumber)"></input> -->
+                      <!-- <input  #inputNumber type="number" placeholder="Número" (ionChange)="ionChangeInpt(inputNumber)"> -->
+                  </ion-button>
+                  <ion-button *ngIf="tareas" size="small" class="btn-search" (click)="mostrarParquimetro()" disabled="true">
+                      <ion-icon name="search" color="light"></ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="!tareas" size="small" class="btn-search" (click)="mostrarParquimetro()">
+                      <ion-icon name="search" color="light"></ion-icon>
+                  </ion-button>
+          </div>
+      </div>
+  </ion-buttons>
+</div>

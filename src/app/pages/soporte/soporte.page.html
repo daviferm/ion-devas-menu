@@ -1,0 +1,53 @@
+<app-navbar [pageActive]="pageSelected"></app-navbar>
+<ion-content>
+    <!-- <h1 class="ion-text-center">Soporte</h1> -->
+    <section>
+        <div>
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-subtitle> INCIDENCIAS DE POSICIÓN </ion-card-subtitle>
+                    <!-- <ion-card-title>Soporte</ion-card-title> -->
+                </ion-card-header>
+
+                <ion-card-content>
+                    <ion-text color="dark">
+                        <p class="ion-p ion-text-justify">
+                            Si necesitas modificar la posición de un parquímetro existente buscalo en el formulario superior y modifica su posición arrastrando el marcador.
+                        </p>
+                    </ion-text>
+                    <ion-text color="dark">
+                        <p class="ion-p ion-text-justify">
+                            Si se trata de un parquímetro que no esta en la base de datos, escribe el número en el apartado de abajo, pulsa el botón de abajo y arrastra el marcador hacia su posición.
+                        </p>
+                    </ion-text>
+
+                    <ion-label position="fixed">Escribe el número</ion-label>
+                    <ion-input class="in-slide-one" autocomplete="off" autofocus="false" clearInput="true" color="dark" type="number" (ionChange)="changeInput($event)"></ion-input>
+
+                    <ion-button class="btn-map" size="large" color="medium" fill="outline" (click)="mostrarMapa()">
+                        <ion-icon name="map-outline"></ion-icon>
+                        <p>
+                            Mostrar mapa
+                        </p>
+                    </ion-button>
+                </ion-card-content>
+            </ion-card>
+
+        </div>
+
+    </section>
+
+</ion-content>
+<div *ngIf="mapSearch">
+    <app-mapa *ngIf="mapSearch" [centroMap]="centroMapa"  [zoomMap]="zoomMap" [markerSoport]="marcador"  (sendCoords)="getCoords($event)" (closeMap)="cerrarMana($event)"></app-mapa>
+    <ion-fab class="animated fadeIn fast btn-w btn-send" vertical="bottom" horizontal="end" slot="fixed" (click)="enviarPosicion()">
+        <ion-fab-button class="btn-send" color="success" >
+            <ion-icon name="logo-whatsapp"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button class="btn-next" color="secondary" (click)="nextSlide()">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab> -->
+</div>

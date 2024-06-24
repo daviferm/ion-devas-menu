@@ -1,0 +1,63 @@
+.cabecera {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 45px;
+  z-index: 100000;
+  background: #222428;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  ion-buttons {
+      .menu {
+          width: 55px;
+      }
+      width: 100% !important;
+      height: 50px !important;
+      position: relative;
+      top: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 .5rem;
+      background-color: #0d0d0d!important;
+      @media screen and (min-width: 992px) {
+          grid-template-columns: 100% !important;
+      }
+      .main-form {
+          display: flex !important;
+          flex-direction: row !important;
+          justify-content: center !important;
+          align-items: center;
+          width: 100%;
+          .content-btn {
+              display: flex;
+              justify-content: center;
+              width: 100%;
+              max-width: 400px;
+              color: whitesmoke;
+          }
+      }
+  }
+}
+ion-item {
+  font: 15pt 'Lucida Sans Unicode';
+  text-align: center;
+  background: linear-gradient(to bottom, #c4d3da, #9bbbda);
+}
+
+.card-item-barrio {
+  height: 35px;
+  background: linear-gradient(to bottom, #767575 40%, #262626 100%);
+  ion-label {
+      width: 100%;
+      text-align: center;
+      color: whitesmoke;
+  }
+}
+.contenido {
+  top: 0px;
+}
+.titulo {
+  text-align: center;
+}

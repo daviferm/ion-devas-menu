@@ -1,0 +1,69 @@
+
+.contenedor {
+  position: absolute;
+  top: 0px;
+  height: 400px;
+  margin: 0px !important;
+  .alert-info {
+      padding: 0rem 1.4rem;
+      h3 {
+          text-align: center;
+      }
+  }
+}
+
+p {
+  margin-bottom: 10px;
+  text-align: justify;
+  // padding: 0 .2em;
+  font-size: 1rem;
+}
+
+// button {
+//     position: relative;
+//     left: 50%;
+//     margin-left: -25px;
+// }
+
+.btnAdd {
+  margin-top: -10px;
+}
+
+.redes {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.facebook,
+.whatsapp,
+.twitter {
+  font-size: 2.5em;
+  position: relative;
+  margin-left: 25px;
+}
+
+.facebook {
+  color: #4862A3;
+}
+
+.redes .whatsapp a i {
+  color: #5FB404;
+}
+
+.redes .twitter a i {
+  color: #26C1F3;
+}
+
+.btn-search {
+  --background: #2fd36f !important;
+  height: 30px;
+  width: 115px;
+  margin-right: 1rem;
+  ion-icon {
+      font-size: 1.2rem;
+  }
+}

@@ -1,0 +1,75 @@
+.cabecera {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 50px;
+  z-index: 100000;
+  background: black;
+  ion-buttons {
+      padding: 5px 0;
+      width: 100% !important;
+      height: 50px !important;
+      position: absolute;
+      top: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 .5rem;
+      background-color: #0d0d0d!important;
+      @media screen and (min-width: 992px) {
+          grid-template-columns: 100% !important;
+      }
+      .main-form {
+          display: flex !important;
+          flex-direction: row !important;
+          justify-content: center !important;
+          align-items: center;
+          width: 100%;
+          .content-btn {
+              display: grid;
+              grid-template-columns: 40% 40% 20%;
+              align-items: center;
+              width: 100%;
+              max-width: 400px;
+          }
+      }
+  }
+}
+
+.btn {
+  height: 30px;
+}
+
+.btn-select {
+  border-radius: 20px !important;
+  --background: white !important;
+  width: 90px;
+  color: black !important;
+  margin-left: 1rem;
+}
+
+.btn-input {
+  --background: white !important;
+  width: 100px;
+  ion-input {
+      --placeholder-color: #000000 !important;
+      color: black !important;
+  }
+}
+
+.btn-search {
+  --background: #2fd36f !important;
+  height: 30px;
+  margin-right: 1rem;
+  ion-icon {
+      font-size: 1.2rem;
+  }
+}
+
+.barrios-btn {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  width: 80%;
+  max-width: 400px;
+}

@@ -1,0 +1,46 @@
+<div #myHeader class="cabecera">
+  <ion-buttons slot="start">
+      <div class="menu">
+          <ion-menu-button></ion-menu-button>
+      </div>
+      <div class="main-form">
+          <div class="content-btn">
+              <ion-title class="titulo">ALTA ROTACIÓN</ion-title>
+          </div>
+      </div>
+  </ion-buttons>
+</div>
+<ion-content [fullscreen]="true">
+
+  <main *ngIf="!verMapa" class="contenido">
+      <ion-card mode="ios">
+        <ion-card-header>
+          <ion-card-subtitle class="ion-text-center">Parquímetros con tarifa de alta rotarión</ion-card-subtitle>
+          <ion-card-subtitle class="ion-text-center"> (maximo 45 minutos) </ion-card-subtitle>
+          <ion-card-title class="ion-text-center">Alta Rotación</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item-group *ngFor="let barrio of barriosSort">
+            <ion-item-divider class="card-item-barrio">
+              <ion-label> {{  barrio.barrio }} </ion-label>
+              <ion-icon name="extension-puzzle-outline" slot="start"></ion-icon>
+            </ion-item-divider>
+            <ion-item *ngFor="let item of barrio.items">
+              <ion-label> {{  item.alias }} </ion-label>
+              <ion-icon name="speedometer-outline" size="small" slot="start"></ion-icon>
+            </ion-item>
+
+          </ion-item-group>
+        </ion-card-content>
+
+      </ion-card>
+  </main>
+  <ion-fab *ngIf="!verMapa" vertical="bottom" horizontal="start" slot="fixed" edge>
+    <ion-fab-button color="secondary" (click)="mostrarMapa()">
+        <ion-icon name="map-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div *ngIf="verMapa">
+    <app-map-items  [marcadores]="itemsAltaRotacion"  [centroMap]="centroMap" [zoomMap]="zoomMap" (closeMap)="cerrarMapa($event)"></app-map-items>
+  </div>
+</ion-content>

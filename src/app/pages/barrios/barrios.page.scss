@@ -1,0 +1,13 @@
+
+.card-items {
+  max-height: calc(100vh - 180px); /* Altura máxima del card */
+  overflow: hidden; /* Oculta el desbordamiento */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-items ion-card-content {
+  overflow-y: auto; /* Habilita el scroll vertical */
+  flex: 1;
+}
+

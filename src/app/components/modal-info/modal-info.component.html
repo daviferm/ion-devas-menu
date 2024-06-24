@@ -1,0 +1,70 @@
+<ion-modal #modal [isOpen]="modalOpen" [initialBreakpoint]="0.70" [breakpoints]="[0, 0.25, 0.5, 0.90, 0.70]" (ionModalDidDismiss)="ionModalDidDismiss()">
+  <ng-template>
+    <ion-content>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button color="medium" (click)="ionModalDidDismiss()">Cerrar</ion-button>
+            </ion-buttons>
+            <ion-title>Información</ion-title>
+            <ion-buttons slot="end">
+              <ion-button color="medium" (click)="ionModalDidDismiss()" [strong]="true">Cerrar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+          <div class="contenedor" [ngSwitch]="pageActive">
+              <div *ngSwitchCase="'home'" class="alert alert-info" role="alert">
+                  <h3>Instrucciones</h3>
+                  <p>Esta herramienta es un buscador de parquímetros.</p>
+                  <p>Selecciona un barrio y los últimos número del parquímetro que quieras buscar y pulsa el boton verde.</p>
+                  <p>Una vez mostrado la posición del parquímetro en el mapa, podrás abrir la app de google maps para mostrarte el camino pulsando el botón azul que aparece abajo a la izquierda</p>
+                  <hr size="8px" color="black" />
+                  <p>Para ver los parquímetros de un barrio selecciona un barrio en el mapa y pulsa el boton</p>
+                  <ion-button size="small" color="dark">
+                    <ion-icon name="pin-outline"></ion-icon>
+                  </ion-button>
+                  <p>que aparece en el cartel superior a la derecha.</p>
+              </div>
+              <div *ngSwitchCase="'barrios'" class="alert alert-info" role="alert">
+                  <h3>Instrucciones</h3>
+                  <p>Esta herramienta surge de la necesidad de llevar un control del mantenimiento por barrios.</p>
+                  <p>Para comenzar selecciona un barrio en el formularo de arriba. Pulsando el boton</p>
+                  <ion-button size="small" class="btn-search">
+                    <ion-icon name="search" color="light"></ion-icon>
+                  </ion-button>
+                  <p>y añadiendo el nombre del la tarea a realizar se creará un nuevo mapa con los parquímetros del barrio seleccionado.</p>
+                  <p>Pulsando sobre el nuevo mapa creado se mostrarán todos los parquímetros del barrio en un mapa, donde podras llevar un control del mantenimiento realizado.</p>
+                  <p>Los parquímetros que marques como tarea realizada aparecerán mas claros.</p>
+              </div>
+              <div *ngSwitchCase="'listas'" class="alert alert-info" role="alert">
+                  <h3>Instrucciones</h3>
+                  <p>Esta herramienta surge de la necesidad de hacer una misma tarea de mantenimiento a varios parquímetros de distintos barrios.</p>
+                  <p>Para comenzar pulsa el botón</p>
+                    <ion-fab-button>
+                        <ion-icon name="add"></ion-icon>
+                    </ion-fab-button>
+                  <p>para añadir el nombre de la tarea a realizar.</p>
+                  <p>A continuación podrás ir añadiendo parquímetros a la tarea creada y ver la posición de cada uno en el mapa, e ir eliminando los que vayas haciendo.</p>
+              </div>
+              <div *ngSwitchCase="'incidencias'" class="alert alert-info" role="alert">
+                  <h3>Instrucciones</h3>
+                  <p>Esta herramienta surge de la necesidad de llevar un control de incidencias que vayas observando en diferentes parquímetros, donde no comparten el tipo de incidencia ni el barrio, y que tengas que dejar para otra ocasión</p>
+                  <p>Las incidencias que vayas haciendo no se eliminaran, si no que a pareceran en el link de
+                      <span class="badge badge-secondary">COMPLETADOS</span>
+                  </p>
+              </div>
+              <div *ngSwitchCase="'share'" class="alert alert-info" role="alert">
+                  <h3>Instrucciones</h3>
+                  <p>Esta herramienta surge de la necesidad de crear tareas compartidas.</p>
+                  <p>Las lista creadas podrán ser vistas desde cualquier dispositivo por cualquier usuario</p>
+                  <p>Para comenzar pulsa el botón</p>
+                  <button class="btnAdd" mat-fab color="primary">
+            <i class="material-icons">add</i>
+        </button>
+                  <p>para añadir el nombre de la tarea a realizar.</p>
+                  <p>A continuación podrás ir añadiendo parquímetros a la tarea creada y ver la posición de cada uno en el mapa, e ir eliminando los que vayas haciendo.</p>
+              </div>
+          </div>
+      </ion-content>
+  </ng-template>
+</ion-modal>

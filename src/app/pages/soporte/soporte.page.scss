@@ -1,0 +1,53 @@
+
+
+ion-card {
+  height: 90%;
+  ion-card-content {
+      width: 100%;
+  }
+  .ion-p {
+      background-color: #d0e1ff;
+      padding: 1rem 1.5rem;
+      margin: .5rem 0;
+      color: #074298;
+  }
+  .in-slide-one {
+      --background: #f8f9f9;
+      --border-radius: 8px;
+      color: black;
+      width: 80%;
+      margin-left: 10%;
+      margin-top: .5rem;
+  }
+}
+
+.btn-map {
+  margin-top: 1rem;
+  width: 80%;
+  margin-left: 9.5%;
+  p {
+    margin-left: 1rem;
+  }
+}
+
+.iconRotar {
+  animation: iconRotar 1s infinite linear;
+}
+
+ion-list,
+ion-item {
+  width: 100%;
+}
+
+@keyframes iconRotar {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+.btn-send {
+  z-index: 1000000000;
+}

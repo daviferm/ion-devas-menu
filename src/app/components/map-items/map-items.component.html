@@ -1,0 +1,72 @@
+<!-- Angular maps -->
+@if ( marcadores && gestionRutasService.pageActive != 'alta-rotacion' ) {
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button class="btn-close" color="medium" (click)="cerrarMapa()">
+        <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+}
+@if (gestionRutasService.pageActive == 'alta-rotacion' ) {
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button class="btn-close-rotacion" color="medium" (click)="cerrarMapa()">
+        <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+}
+<google-map #mapDiv
+  [options]="mapOptions"
+    height="100vh"
+    width="100vw"
+    [center]="{lat: centroMap.lat, lng: centroMap.lng}"
+    [zoom]="zoomMap"
+    (mapClick)="mapaClick()"
+    (zoomChanged)="zoomChangeMap(mapDiv)">
+
+    @if ( gestionRutasService.pageActive === 'barrios' ) {
+      <div class="animated fadeIn fast">
+
+        @for ( marker of tareaActiva.items; track marker.id ; let i = $index ) {
+
+          <map-marker [position]="{lat: marker.latitud, lng: marker.longitud}"  [options]="{opacity: marker.opacidad}" [icon]="pinMaker" [label]="marker.alias | iconAlias" (mapClick)="abrirModal(marker)" ></map-marker>
+        }
+      </div>
+    }
+
+    @for ( marker of marcadores; track marker.id; let i = $index ) {
+      <div class="animated fadeIn fast">
+
+        <map-marker [position]="{lat: marker.latitud, lng: marker.longitud}" [icon]="pinMaker" [label]="marker.alias | iconAlias" (mapClick)="abrirModal(marker)"></map-marker>
+      </div>
+    }
+
+    @for ( tarea of incidenciasList; track tarea.localId; let i = $index ) {
+
+      <div class="animated fadeIn fast">
+
+        <map-marker [position]="{lat: tarea.item.latitud, lng: tarea.item.longitud}" [icon]="pinMaker" [label]="tarea.item.alias.slice(7,10)" (mapClick)="abrirModalIncidencia(tarea)"></map-marker>
+
+      </div>
+    }
+
+    @if ( gps ) {
+      <map-marker [position]="{lat: latGps, lng: lngGps}" [icon]="imgPosition"></map-marker>
+    }
+
+    @for ( barrio of barriosSelec; track barrio.id; let i = $index ) {
+
+      <map-polygon [id]="barrio.id" [options]="polygonOptions" [paths]="barrio.coords"></map-polygon>
+
+    }
+</google-map>
+
+<ion-fab class="btn-nav" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="light" (click)="centrarPosicionGps(mapDiv)">
+      <ion-icon class="animated fadeIn" name="navigate"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+@if ( openModal ) {
+
+  <app-detalles-modal [rutaActiva]="gestionRutasService.pageActive" [item]="infoMarker" [titulo]="tareaTitle" (cerrarAlert)="cerrarModalInfo($event)" (tareaRealizada)="tareaRealizada($event)"></app-detalles-modal>
+}
+

@@ -1,0 +1,109 @@
+<app-header [pageActive]=" 'barrios' "></app-header>
+
+<ion-content [fullscreen]="true">
+
+    <main class="main">
+        <div #mySubNav class="swiper" mode="ios">
+            @if ( itemsMapas ) {
+              <section class="slide">
+                      <ion-card>
+                          <ion-card-header>
+                              <ion-card-subtitle>Crea mapas de barrios</ion-card-subtitle>
+                              <ion-card-title class="titulo-card">Mantenimiento por barrios</ion-card-title>
+                          </ion-card-header>
+                          <ion-card-content>
+                              <ion-list>
+                                  <ion-reorder-group [disabled]="reorderDisable" (ionItemReorder)="doReorder($event)">
+                                      @for ( tarea of tareasBarrios; track tarea.barrio; let i = $index ) {
+
+                                        <ion-item-sliding #slider class="animated fadeIn fast" (ionDrag)="onItemDragSlider($event, i, slider)" (ionSwipe)="borrarMapa(slider, i)">
+                                            <ion-item-options side="start">
+                                                <ion-item-option color="danger" (click)="borrarMapa(slider, i)" expandable>Borrar</ion-item-option>
+                                            </ion-item-options>
+                                            <ion-item color="light" detail>
+                                                <ion-reorder slot="start"></ion-reorder>
+                                                <!-- <ion-icon name="list-outline" slot="start"></ion-icon> -->
+                                                <ion-label (click)="mostrarMapa(slider, i)" class="ion-text-center"> {{ tarea.titulo }} </ion-label>
+                                                <div class="badge-items">
+                                                    <p class="ion-text-center"> {{ tarea | contarItems }} </p>
+                                                    <ion-badge color="dark" class="md-2">Barrio: {{ tarea.barrio | slice:0:3 }} </ion-badge>
+                                                </div>
+                                            </ion-item>
+                                            <ion-item-options side="end">
+                                                <ion-item-option color="primary" (click)="mostrarLista(slider, i)">Lista</ion-item-option>
+                                                <ion-item-option color="secondary" (click)="mostrarMapa(slider, i)" expandable>Mapa</ion-item-option>
+                                            </ion-item-options>
+                                        </ion-item-sliding>
+                                      }
+
+                                    </ion-reorder-group>
+                              </ion-list>
+                          </ion-card-content>
+                      </ion-card>
+              </section>
+            } @else {
+              <section class="items slide">
+                      <ion-header>
+                          <ion-toolbar>
+                              <ion-buttons slot="start">
+                                  <ion-buttons slot="start">
+                                      <ion-button (click)="mostrarTareas()" expand="block" fill="clear" shape="round">
+                                          <ion-icon name="chevron-back-outline"></ion-icon>
+                                      </ion-button>
+                                  </ion-buttons>
+                              </ion-buttons>
+                              @if ( tareaActiva ) {
+                                <ion-label> {{ tareaActiva.titulo }} </ion-label>
+                              }
+                          </ion-toolbar>
+                      </ion-header>
+                      <ion-card class="card-items">
+                          <ion-card-header>
+                              @if ( tareaActiva ) {
+                                <ion-card-title> {{ tareaActiva.titulo }} </ion-card-title>
+                              }
+                          </ion-card-header>
+                          @if ( tareaActiva ) {
+                            <ion-card-content>
+                                @if ( tareaActiva.items.length < 1 ) {
+                                  <ion-item color="secondary">
+                                      <ion-label color="dark" class="ion-text-center">Ningún elemento añadido...</ion-label>
+                                  </ion-item>
+                                }
+                                <div class="div-items">
+                                    @for ( item of tareaActiva.items; track item.alias; let i = $index ) {
+                                      <ion-list>
+                                          <ion-item color="light">
+                                              <ion-reorder slot="start"></ion-reorder>
+                                              <ion-label class="ion-text-center"> {{ item.alias }} </ion-label>
+                                              <ion-checkbox aria-label="Label" color="dark" slot="end" [(ngModel)]="item.hecho" (ionChange)="ionChangeCheck(item)"></ion-checkbox>
+                                          </ion-item>
+                                      </ion-list>
+                                    }
+                                </div>
+                            </ion-card-content>
+                          }
+                      </ion-card>
+              </section>
+            }
+        </div>
+        @if ( !tareas ) {
+          <ion-fab vertical="bottom" horizontal="start" slot="fixed" edge>
+              <ion-fab-button color="secondary" (click)="mostrarMapa()">
+                  <ion-icon name="map-outline"></ion-icon>
+              </ion-fab-button>
+          </ion-fab>
+        } @else {
+          <ion-fab class="btn-info"  vertical="bottom" horizontal="start" slot="fixed" edge>
+            <ion-fab-button class="btn-info-fab" color="medium" (click)="openModalInfo()">
+                <ion-icon name="information-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        }
+    </main>
+</ion-content>
+<div *ngIf="mapSearch">
+    <app-map-items [centroMap]="centroMap" [zoomMap]="zoomMap" [barriosSelec]="barriosSelec" [tareaActiva]="tareaActiva!" (closeMap)="cerrandoMapa($event)"></app-map-items>
+</div>
+<modal-info [modalOpen]="openModal" [pageActive]=" 'barrios' " (closeModal)="closeModalInfo($event)"></modal-info>
+
