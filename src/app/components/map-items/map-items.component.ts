@@ -87,13 +87,10 @@ export class MapItemsComponent implements OnInit {
   ngOnInit() {
     this.obtenerPosicion();
     this.pinMaker = ( this.gestionRutasService.pageActive != 'alta-rotacion' ) ? 'assets/img/pin-items.png' : 'assets/img/pin-marker-alias.png';
-    this.$obsLocation = new Subject();
-    // this.$subscription = this.nativeLocationService.watchPosition().subscribe( this.$obsLocation );
-    // this.$obsGps = this.$obsLocation.subscribe( ( data: Geoposition ) => {
-    //     this.latGps = data.coords.latitude;
-    //     this.lngGps = data.coords.longitude;
-    //     this.gps = true;
-    // } )
+  }
+  ngOnDestroy() {
+    this.gps = false;
+    this.$subscription.unsubscribe();
   }
   abrirModalIncidencia( incidencia: IncidenciaInteface ) {
     this.infoMarker = incidencia.item;
@@ -171,14 +168,25 @@ export class MapItemsComponent implements OnInit {
       this.tareaActiva.items!.forEach( item => item.idx = '' );
     }
   }
-
   obtenerPosicion() {
-    this.nativeLocationService.getGeolocation().then( (data: any) => {
-      this.gps = true;
-      this.latGps = Number(data.coords.latitude);
-      this.lngGps = Number(data.coords.longitude);
+
+    this.$subscription = this.nativeLocationService.watchPosition().subscribe( position => {
+      if ( position ) {
+        this.gps = true;
+        this.latGps = Number(position.coords.latitude);
+        this.lngGps = Number(position.coords.longitude);
+        console.log(position);
+      }
     } )
   }
+
+  // obtenerPosicion() {
+  //   this.nativeLocationService.getGeolocation().then( (data: any) => {
+  //     this.gps = true;
+  //     this.latGps = Number(data.coords.latitude);
+  //     this.lngGps = Number(data.coords.longitude);
+  //   } )
+  // }
 
   centrarPosicionGps( mapa: GoogleMap ) {
     mapa.panTo( {lat: this.latGps, lng: this.lngGps} );

@@ -41,7 +41,7 @@ export class AltaRotacionPage implements OnInit {
 
   constructor() {
                 localStorage.setItem('page', 'alta-rotacion');
-    // this.dataFormService.obtenerItemsAltaRotacion();
+    this.dataFormService.obtenerItemsAltaRotacion();
     this.gestionRutasService.pageActive = 'alta-rotacion';
     }
 
@@ -52,13 +52,13 @@ export class AltaRotacionPage implements OnInit {
 
   getLogacStorage() {
     const storaString = String(this.storageService.getLocalStorage('itemsAR'));
-    this.itemsAltaRotacion = JSON.parse( storaString );
-    const barriosStr = String( localStorage.getItem('barriosAR') );
-    this.barriosSort = JSON.parse( barriosStr );
-    this.itemsAltaRotacion.forEach( elem => {
-      elem.latitud = Number(elem.latitud);
-      elem.longitud = Number(elem.longitud);
-    } )
+    const itemsRotacion = JSON.parse( storaString );
+    this.itemsAltaRotacion = Object.values( itemsRotacion );
+    this.barriosSort = JSON.parse( String(localStorage.getItem('barriosAR')) );
+    for ( let element of this.itemsAltaRotacion ) {
+      element.latitud = Number(element.latitud);
+      element.longitud = Number(element.longitud);
+    }
 }
 
   mostrarMapa() {

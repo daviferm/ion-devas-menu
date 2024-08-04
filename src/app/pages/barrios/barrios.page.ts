@@ -268,7 +268,6 @@ export class BarriosPage implements OnInit {
       if ( idx ) {
         this.tareaActiva = this.tareasBarrios[idx];
       }
-
     }
     const numBarrio = this.tareaActiva!.barrio.slice(0,3);
     this.centroMap = this.optenerCentro( Number(numBarrio) );
