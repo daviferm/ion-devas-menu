@@ -153,21 +153,21 @@ export class NavbarComponent  implements OnInit {
   mostrarParquimetro() {
     if ( !this.selectBarrio ) {
       this.presentToastWithOptions(
-        `<strong> SELECCIONA UN BARRIO !! </strong>`
+        'SELECCIONA UN BARRIO !!'
       );
       return;
     }
     if ( this.pageActive !== 'barrios' ) {
       if ( !this.inputNumero ) {
         this.presentToastWithOptions(
-          `<strong> ESCRIBE UN NÚMERO !! </strong>`
+          'ESCRIBE UN NÚMERO !!'
         );
         return;
       }
       if ( this.inputNumero.toString().length > 4 ) {
         console.log('El número debe tener 4 dígitos como máximo!!!');
         this.presentToastWithOptions(
-          `<strong> NO MÁS DE 4 DÍGITOS !! </strong>`
+          'NO MÁS DE 4 DÍGITOS !!'
         );
         return;
       }
@@ -185,6 +185,7 @@ export class NavbarComponent  implements OnInit {
     }
     if ( this.pageActive !== 'barrios' ) {
       this.objNumero.value = "";
+      this.inputNumero = 0;
     }
     // if ( this.pageActive === 'home' ) {
     //   this.ocultarNavbar();

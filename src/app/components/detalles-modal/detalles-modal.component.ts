@@ -25,7 +25,6 @@ export class DetallesModalComponent implements OnInit {
 
   ngOnInit() {
     this.rutaActiva = this.gestionRutasService.pageActive;
-    console.log(this.item);
   }
 
   async comoLlegar( marker: Parquimetro, mapa: string ) {

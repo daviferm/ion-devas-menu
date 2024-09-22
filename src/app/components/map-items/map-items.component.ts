@@ -153,6 +153,9 @@ export class MapItemsComponent implements OnInit {
         this.incidenciasList.splice( index, 1 );
         this.storage.setLocalStorage('lista-incidencias', JSON.stringify(this.incidenciasList));
         this.openModal = false;
+        if ( this.incidenciasList.length == 0 ) {
+          this.closeMap.emit(true);
+        }
         break;
     }
   }
