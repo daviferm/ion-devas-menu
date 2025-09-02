@@ -178,7 +178,6 @@ export class MapItemsComponent implements OnInit {
         this.gps = true;
         this.latGps = Number(position.coords.latitude);
         this.lngGps = Number(position.coords.longitude);
-        console.log(position);
       }
     } )
   }

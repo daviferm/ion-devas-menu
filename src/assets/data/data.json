@@ -1338,8 +1338,9 @@
       "empresa": "Devas 1",
       "estado": "activo",
       "fabricante": "Parkeon",
-      "latitud": "40.443672",
-      "longitud": "-3.702632",
+      "idx": "",
+      "latitud": 40.44311268714972,
+      "longitud": -3.702176024467474,
       "tarifa": "ZBE"
     },
     {
@@ -2713,8 +2714,9 @@
       "empresa": "Devas 1",
       "estado": "activo",
       "fabricante": "WisePark",
-      "latitud": "40.471226",
-      "longitud": "-3.692619",
+      "idx": "",
+      "latitud": 40.47124895497185,
+      "longitud": -3.692867774886135,
       "tarifa": "Normal"
     },
     {
@@ -11885,8 +11887,9 @@
       "empresa": "Devas 1",
       "estado": "activo",
       "fabricante": "WisePark",
-      "latitud": "40.466087",
-      "longitud": "-3.696014",
+      "idx": "",
+      "latitud": 40.465945178259325,
+      "longitud": -3.695926828207008,
       "tarifa": "Normal"
     },
     {
@@ -22678,14 +22681,25 @@
       "tarifa": "Normal"
     },
     {
-      "alias": "0205611039",
+      "alias": "0205611116",
       "barrio": "56 CASTILLA.",
-      "direccion": "Av. de Burgos esquina Nuestra Señora del Recuerdo",
+      "direccion": "C. de Sta. Magdalena Sofía, 1",
       "empresa": "Devas 2",
       "estado": "activo",
       "fabricante": "Parkare",
-      "latitud": "40.469054",
-      "longitud": "-3.676942",
+      "latitud": "40.469158",
+      "longitud": "-3.676497",
+      "tarifa": "Normal"
+    },
+    {
+      "alias": "0205611117",
+      "barrio": "56 CASTILLA.",
+      "direccion": "Av. de Burgos, 4",
+      "empresa": "Devas 2",
+      "estado": "activo",
+      "fabricante": "Parkare",
+      "latitud": "40.4697430",
+      "longitud": "-3.6763730",
       "tarifa": "Normal"
     },
     {
@@ -27460,6 +27474,17 @@
       "fabricante": "Parkeon",
       "latitud": "40.448121",
       "longitud": "-3.651871",
+      "tarifa": "Normal"
+    },
+    {
+      "alias": "0215631563",
+      "barrio": "156 SAN JUAN BAUTISTA",
+      "direccion": "C/Manuel Maria Iglesias, 7",
+      "empresa": "Devas 2",
+      "estado": "activo",
+      "fabricante": "Parkeon",
+      "latitud": "40.4515688",
+      "longitud": "-3.6539413",
       "tarifa": "Normal"
     },
     {

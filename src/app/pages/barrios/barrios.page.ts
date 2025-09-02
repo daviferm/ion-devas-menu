@@ -191,7 +191,6 @@ export class BarriosPage implements OnInit {
       hecho: false,
       items: this.mapaNuevo
     }
-    console.log(nuevoMapa);
     this.tareasBarrios.push( nuevoMapa );
     this.storageService.setLocalStorage( 'maps-barrios',  JSON.stringify(this.tareasBarrios) );
   }
